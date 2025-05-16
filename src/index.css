@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+.section {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.red-hat-display-600 {
+  font-family: "Red Hat Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+.change .bar1 {
+  transform: translate(0, 9px) rotate(-45deg);
+  transition: 0.5s;
+}
+.change .bar2 {
+  transition: 0.5s;
+  transform: scaleX(0);
+}
+
+.change .bar3 {
+  transform: translate(1px, -10px) rotate(45deg);
+  transition: 0.5s;
+}
+
+button,
+input {
+  outline: none;
+}
+
+.flow {
+  transform: translateY(-150%);
+  transition: 0.5s;
+}
