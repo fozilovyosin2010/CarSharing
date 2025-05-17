@@ -8,8 +8,6 @@ import Clock from "../assets/Clock.png";
 import location from "../assets/location.png";
 import mail from "../assets/mail.png";
 
-import Mers from "../assets/Mers.png";
-
 const Layout = () => {
   let links = ["Home", "About Us", "Our service", "Fleets"];
   let [valLink, setValLink] = useState(false);
@@ -48,8 +46,8 @@ const Layout = () => {
   }, [change]);
   return (
     <div className="bg-[#252222] text-[#fff]">
-      <div className="grow-[1] min-h-screen pb-2">
-        <div className="header  border-b">
+      <div className="grow-[1] min-h-screen flex flex-col pb-2">
+        <div className="header bg-[#00000098] backdrop-blur-[5px] fixed z-[60] w-full top-0 left-0 border-b">
           <div className="section flex items-center justify-between py-5 px-3">
             <div className="logo">
               <img className="w-[150px] " src={logo} alt="" />
@@ -98,7 +96,6 @@ const Layout = () => {
             </div>
           </div>
         </div>
-
         <Outlet />
       </div>
       {change ? (
@@ -168,7 +165,7 @@ const Layout = () => {
               })}
             </div>
           </div>
-          <div className="detail grid grid-cols-4 gap-3 max-md:grid-cols-2 justify-center items-center py-3">
+          <div className="detail  grid grid-cols-4 gap-[20px] max-md:grid-cols-2 justify-center items-center py-3">
             {detail_List.map((e, i) => {
               return (
                 <div
