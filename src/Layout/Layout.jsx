@@ -129,6 +129,7 @@ const Layout = () => {
           </div>
         </div>
       ) : null}
+
       <div className="footer  pt-3 relative bottom-0 text-black bg-[#fff]">
         <div className="max-w-[1200px] px-[25px] flex flex-col  gap-[20px] m-[0_auto]">
           <div className="sec1 gap-3 max-md:flex-wrap max-md:justify-center flex justify-between ">
