@@ -44,6 +44,7 @@ const Layout = () => {
     } else {
     }
   }, [change]);
+
   return (
     <div className="bg-[#252222] text-[#fff]">
       <div className="grow-[1] min-h-screen flex flex-col pb-2">
@@ -130,7 +131,7 @@ const Layout = () => {
         </div>
       ) : null}
 
-      <div className="footer  pt-3 relative bottom-0 text-black bg-[#fff]">
+      <div className="footer mt-2 pt-3 relative bottom-0 text-black bg-[#fff]">
         <div className="max-w-[1200px] px-[25px] flex flex-col  gap-[20px] m-[0_auto]">
           <div className="sec1 gap-3 max-md:flex-wrap max-md:justify-center flex justify-between ">
             <div className="block1 flex  flex-col">

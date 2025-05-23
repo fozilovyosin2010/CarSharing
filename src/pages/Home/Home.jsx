@@ -1,7 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Mers from "../../assets/Mers.png";
+import Chaufer from "../../assets/chauffeur-service-10 1.png";
 import InputBox from "../../components/InputBox";
+
+import img1 from "../../assets/472-transfer-to-dalaman 1.png";
+import img2 from "../../assets/Car5 1.png";
+import img3 from "../../assets/Tips-for-a-Successful-Airport-Transfer-Limousine-Service 1.png";
+import img4 from "../../assets/Reasons.png";
+import SerCards from "../../components/serCards";
+
+import BenzV2 from "../../assets/Benz-2.png";
+
+import rightArr from "../../assets/rightArr.svg";
+import leftArr from "../../assets/leftArr.svg";
+
+import mersB from "../../assets/Benz-V-Class.png";
+import mersB2 from "../../assets/fcf3a5b062ce20bf24f27c6e8005d8e3 1.png";
+import Bmw from "../../assets/M5 1.png";
+import Carusel from "../../components/Carusel";
+
 const Home = () => {
   // <div className="bg-[url('src/assets/Union1.png')] bg-repeat-y bg-center h-screen"></div>
 
@@ -32,9 +50,58 @@ const Home = () => {
   let [rangeL, setRangeL] = useState(0);
   let [rangeH, setRangeH] = useState(0);
 
+  let services = [
+    {
+      img: img1,
+      text: "Airport transfers",
+      des: "With additional wait time and flight tracking in case of delays, our service is optimized to make every airport transfer a breeze.",
+    },
+    {
+      img: img2,
+      text: "Intercity Rides",
+      des: "Your stress-free solution for traveling between cities, with chauffeurs across the globe.",
+    },
+    {
+      img: img3,
+      text: "Business Meeting",
+      des: "Concentrate on your meeting with your partners, forget about the road and the car, which will distract your thoughts.",
+    },
+    {
+      img: img4,
+      text: "Wedding Parties",
+      des: "Our friendly, and attentive service combined with thorough attention to detail ensure you can truly relax and enjoy your special day.",
+    },
+  ];
+
+  let caruselData = [
+    {
+      img: mersB,
+      title: "Mersedes Benz V-Class",
+      style:
+        "bg-[#494949]  p-[10px_15px] flex justify-between flex-col rounded-lg",
+    },
+    {
+      style:
+        "bg-[#494949]  p-[10px_15px] flex justify-between flex-col rounded-lg",
+      img: mersB2,
+      title: "Mersedes Benz S-Class",
+    },
+    {
+      style:
+        "bg-[#494949]  p-[10px_15px] flex justify-between flex-col rounded-lg",
+      img: Bmw,
+      title: "BMW M5 F90 Competition",
+    },
+  ];
+
+  let [slideId, setSlideId] = useState(0);
+  useEffect(() => {
+    console.log(slideId);
+    // console.log(caruselData[slideId].img);
+  }, [slideId]);
   return (
-    <div className="pt-[86px] bg-[url('src/assets/Union1.png')] bg-center bg-repeat-y h-screen">
-      <div className="sec1 mx-[30px] text-black mb-[30px] rounded-[40px] max-h-[580px] bg-[#fff]">
+    <div className="pt-[86px] bg-[url('src/assets/Union1.png')] bg-center bg-repeat-y ">
+      <div className="sec1  mx-[30px] text-black mb-[30px] rounded-[40px] max-h-[580px] bg-[#fff]">
         <div className="block1 ">
           <div className="miniBlock1 rounded-[40px] flex items-center max-w-[1440px] m-[0_auto] z-10 w-full bg-[url('src/assets/Mers.png')] bg-right h-[500px] bg-no-repeat ">
             <div className="flex flex-col max-xl:bg-[#ffffff5b] max-md:w-full max-xl:backdrop-blur-[5px] p-[20px] items-start justify-between gap-[20px]">
@@ -52,7 +119,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="block2 max-w-[1200px] max-lg:hidden  px-[20px] text-[#fff] m-[0_auto]">
+        <div className="block2 section2 max-lg:hidden  px-[20px] text-[#fff]">
           <div className="miniBlock1 flex">
             <div
               onClick={() => setHeader(false)}
@@ -126,12 +193,136 @@ const Home = () => {
                 </div>
               </div>
             )}
-
-            {/* {header?hello:} */}
           </div>
         </div>
       </div>
-      <div className="sec2"></div>
+      <div className="sec2 section2 pt-[60px] px-[20px] gap-3 flex flex-col">
+        <div className="block1">
+          <div className="nova-square-regular text-[45px]">About Us</div>
+          <div className="red-hat-display-200 text-[#ddd] text-[16px]">
+            The best offer of world-class transportation solutions for your
+            events
+          </div>
+        </div>
+        <div className="block2 bg-[#333333] p-[30px] rounded-[27px] flex justify-between gap-[30px] max-lg:flex-wrap items-center">
+          <img src={Chaufer} className="w-[500px] max-lg:w-full" />
+          <div className="flex flex-col items-start max-w-[600px] content-between max-lg:text-[12px] max-lg:max-w-full text-[14px] gap-[30px]">
+            <div>
+              A Chauffeur Car Service company at your disposal for all your
+              trips.
+            </div>
+            <div>
+              Recognized for its professionalism towards companies,
+              professionals and individuals, Limogroup is a company based in
+              Switzerland. Specialized in the tailor-made transport with
+              chauffeur, we offer high end services for your private and
+              business trips.
+            </div>
+            <div>
+              We have a fleet of prestigious and modern vehicles for a
+              comfortable and secure accompaniment in the destinations of your
+              choice. Our mission is to provide you with an excellent service as
+              well as a personalized welcome for your short and long journeys.
+            </div>
+            <div>
+              Thanks to our experience, we guarantee a high-end accompaniment to
+              meet all your needs: rental of a chauffeured car, transfers, group
+              transfers, private events, weddings, conferences and exhibitions,
+              meet & greet... Our bilingual drivers are available to guide you
+              in all your trips in Switzerland and abroad.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="sec3 section2 pt-[60px] px-[20px]">
+        <div className="block1">
+          <div className="nova-square-regular text-[45px]">Our Services</div>
+          <div className="red-hat-display-200 text-[#ddd] text-[16px]">
+            Worldwide fast & easy access for all occasions.
+          </div>
+        </div>
+        <div className="block2 grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 justify-center gap-2">
+          {services.map((e, i) => {
+            return <SerCards key={i} {...e} />;
+          })}
+        </div>
+      </div>
+      <div className="sec4 overflow-x-hidden pb-[150px] section2 px-[20px] flex flex-col justify-between gap-3">
+        <div className="block1">
+          <div className="nova-square-regular text-[45px]">Our Fleets</div>
+          <div className="red-hat-display-200 text-[#ddd] text-[16px]">
+            Choose according to your desire and circumstances
+          </div>
+        </div>
+
+        <div className="block2 mb-[70px] relative max-md:flex-col flex backdrop-blur-[5px] p-[20px_40px] rounded-[15px]  gap-1 bg-[#6a67673a] justify-between">
+          <div className="miniBlock1 py-2 flex flex-col gap-[20px]">
+            <div className="red-hat-display-600 text-[35px] ">
+              Mersedes Benz V Class
+            </div>
+            <div>
+              <div>
+                <span className="red-hat-display-600 text-[18px]">
+                  Passengers:
+                </span>{" "}
+                6
+              </div>
+              <div>
+                <span className="red-hat-display-600 text-[18px] ">
+                  Transmission:
+                </span>{" "}
+                automatic
+              </div>
+            </div>
+            <div>
+              <button className="p-[8px_32px] red-hat-display-600 text-[14px] flex items-center gap-3 bg-[#fff] text-black rounded-lg">
+                <div>Get Limousine</div>
+              </button>
+            </div>
+          </div>
+          <div className="miniBlock2">
+            <div className="flex gap-1 p-[10px_20px] max-md:justify-end">
+              <div className="nova-square-regular text-[25px]">190$ /</div>
+              <div className="nova-square-regular text-[14px] text-[#ccc] pt-3">
+                per hour
+              </div>
+            </div>
+
+            <img
+              src={caruselData[slideId].img}
+              alt=""
+              className="w-full max-md:inline-block hidden"
+            />
+          </div>
+          <img
+            src={caruselData[slideId].img}
+            className="absolute top-[30%] right-[100px] max-lg:right-[10px] translate-x-[0] duration-500  max-lg:w-[500px] max-md:hidden flex justify-center w-[600px] "
+            alt=""
+          />
+        </div>
+        <div className="block3 pt-3">
+          <div className="flex gap-3">
+            <button
+              onClick={() => setSlideId(slideId <= -1 ? 2 : slideId--)}
+              className="active:scale-110"
+            >
+              <img src={leftArr} alt="" />
+            </button>
+            <button
+              onClick={() => setSlideId(slideId == 3 ? 0 : slideId++)}
+              className="active:scale-110"
+            >
+              <img src={rightArr} alt="" />
+            </button>
+          </div>
+          <div className="imgMiniblock grid grid-cols-3 max-sm:grid-cols-1 max-md:grid-cols-2 justify-center gap-3 pt-3">
+            {/* {caruselData.map((e, i) => {
+              return <Carusel key={i} {...e} />;
+            })} */}
+            <Carusel {...caruselData[0]} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
