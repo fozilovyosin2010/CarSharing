@@ -29,7 +29,6 @@ const Layout = () => {
 
   useEffect(() => {
     btnChange.current.classList.toggle("change");
-    console.log(btnChange.current.classList.contains("change"));
 
     root.style.overflow = change ? "hidden" : "visible";
 

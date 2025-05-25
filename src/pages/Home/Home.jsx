@@ -20,6 +20,25 @@ import mersB2 from "../../assets/fcf3a5b062ce20bf24f27c6e8005d8e3 1.png";
 import Bmw from "../../assets/M5 1.png";
 import Carusel from "../../components/Carusel";
 
+// logos
+
+import Cartier from "../../assets/1200px-Cartier_logo.png";
+import Emirates from "../../assets/Emirates.png";
+import IWC from "../../assets/IWC.png";
+import Logo_Chopard from "../../assets/Logo_Chopard.png";
+import Logo_Genève from "../../assets/Logo_Genève_Aéroport 1.png";
+
+// info img
+
+import CarWash from "../../assets/carWash.png";
+import Driver from "../../assets/driverImg.png";
+import MaskG from "../../assets/Mask group.png";
+import PayM from "../../assets/payM.png";
+
+import { useDispatch, useSelector } from "react-redux";
+import { minus, plus } from "../../reducers/slideId";
+import InfoCard from "../../components/InfoCard";
+
 const Home = () => {
   // <div className="bg-[url('src/assets/Union1.png')] bg-repeat-y bg-center h-screen"></div>
 
@@ -48,7 +67,6 @@ const Home = () => {
   ];
 
   let [rangeL, setRangeL] = useState(0);
-  let [rangeH, setRangeH] = useState(0);
 
   let services = [
     {
@@ -74,31 +92,43 @@ const Home = () => {
   ];
 
   let caruselData = [
+    { id: 0, img: mersB, title: "Mersedes Benz V-Class" },
+    { id: 1, img: mersB2, title: "Mersedes Benz S-Class" },
     {
-      img: mersB,
-      title: "Mersedes Benz V-Class",
-      style:
-        "bg-[#494949]  p-[10px_15px] flex justify-between flex-col rounded-lg",
-    },
-    {
-      style:
-        "bg-[#494949]  p-[10px_15px] flex justify-between flex-col rounded-lg",
-      img: mersB2,
-      title: "Mersedes Benz S-Class",
-    },
-    {
-      style:
-        "bg-[#494949]  p-[10px_15px] flex justify-between flex-col rounded-lg",
+      id: 2,
+      style: "max-sm:col-span-1 max-md:col-span-2 ",
       img: Bmw,
       title: "BMW M5 F90 Competition",
     },
   ];
 
-  let [slideId, setSlideId] = useState(0);
-  useEffect(() => {
-    console.log(slideId);
-    // console.log(caruselData[slideId].img);
-  }, [slideId]);
+  let logos = [Logo_Chopard, Logo_Genève, Emirates, IWC, Cartier];
+
+  let slideId = useSelector((e) => e.slideId.id);
+  let dispatch = useDispatch();
+
+  let infoL = [
+    {
+      img: MaskG,
+      title: "Online Reservation",
+      text: "No need to leave the house and go somewhere. Call our drivers online, choosing the right car for yourself.",
+    },
+    {
+      img: Driver,
+      title: "Professional Drivers",
+      text: "Limogroup chauffeurs are among the best trained and most experienced professionals in the industry.",
+    },
+    {
+      img: CarWash,
+      title: "Prestige Vehicles",
+      text: "All our cars radiate maximum comfort and safety, as well as the latest innovations that our industry can offer.",
+    },
+    {
+      img: PayM,
+      title: "Online Payment",
+      text: "For the convenience of our customers, we have made an online payment system, you just have to wait for your car",
+    },
+  ];
   return (
     <div className="pt-[86px] bg-[url('src/assets/Union1.png')] bg-center bg-repeat-y ">
       <div className="sec1  mx-[30px] text-black mb-[30px] rounded-[40px] max-h-[580px] bg-[#fff]">
@@ -140,7 +170,7 @@ const Home = () => {
                 action=""
                 className="rounded-b-lg flex items-center max-w-full justify-between gap-[20px] px-2 rounded-tr-lg bg-[#484848]  "
               >
-                <div className="flex w-full items-center">
+                <div className="flex text-[14px] w-full items-center">
                   {inpTexts.map((e, i) => {
                     return <InputBox key={i} {...e} id={i} />;
                   })}
@@ -169,26 +199,6 @@ const Home = () => {
                       value={rangeL}
                     />
                     <div className="text-[#fff]">km</div>
-                  </div>
-                </div>
-                <div className="flex w-full p-[10px_32px] justify-between">
-                  <input
-                    type="range"
-                    value={rangeH}
-                    min={0}
-                    max={10}
-                    className="w-[80%]"
-                    onChange={(e) => setRangeH(e.target.value)}
-                  />
-                  <div className="flex gap-2 items-center">
-                    <input
-                      type="number"
-                      onChange={(e) => setRangeH(e.target.value)}
-                      className="w-[50px] rounded-lg text-center"
-                      max={10}
-                      value={rangeH}
-                    />
-                    <div className="text-[#fff]">hour</div>
                   </div>
                 </div>
               </div>
@@ -247,7 +257,7 @@ const Home = () => {
           })}
         </div>
       </div>
-      <div className="sec4 overflow-x-hidden pb-[150px] section2 px-[20px] flex flex-col justify-between gap-3">
+      <div className="sec4 overflow-x-hidden pb-[20px] section2 px-[20px] flex flex-col justify-between gap-3">
         <div className="block1">
           <div className="nova-square-regular text-[45px]">Our Fleets</div>
           <div className="red-hat-display-200 text-[#ddd] text-[16px]">
@@ -280,46 +290,78 @@ const Home = () => {
               </button>
             </div>
           </div>
-          <div className="miniBlock2">
-            <div className="flex gap-1 p-[10px_20px] max-md:justify-end">
+          <div className="miniBlock2 pb-[80px] relative flex flex-col justify-between">
+            <div className="flex relative gap-1">
               <div className="nova-square-regular text-[25px]">190$ /</div>
               <div className="nova-square-regular text-[14px] text-[#ccc] pt-3">
                 per hour
               </div>
             </div>
-
+            <div className="absolute z-20 top-[30%] right-[10px]">
+              {slideId !== undefined ? (
+                <img
+                  src={caruselData[slideId].img}
+                  className="w-[400px] max-w-full max-md:inline-block hidden"
+                />
+              ) : null}
+            </div>
+          </div>
+          {slideId !== undefined ? (
             <img
               src={caruselData[slideId].img}
-              alt=""
-              className="w-full max-md:inline-block hidden"
+              className="absolute top-[30%] right-[100px] max-lg:right-[10px] translate-x-[0] duration-500  max-lg:w-[500px] max-md:hidden flex justify-center w-[600px] "
             />
-          </div>
-          <img
-            src={caruselData[slideId].img}
-            className="absolute top-[30%] right-[100px] max-lg:right-[10px] translate-x-[0] duration-500  max-lg:w-[500px] max-md:hidden flex justify-center w-[600px] "
-            alt=""
-          />
+          ) : null}
         </div>
-        <div className="block3 pt-3">
-          <div className="flex gap-3">
+        <div className="block3 pt-3 max-md:pt-[40px]">
+          <div className="flex gap-3 z-10">
             <button
-              onClick={() => setSlideId(slideId <= -1 ? 2 : slideId--)}
+              onClick={() => dispatch(minus())}
               className="active:scale-110"
             >
               <img src={leftArr} alt="" />
             </button>
             <button
-              onClick={() => setSlideId(slideId == 3 ? 0 : slideId++)}
+              onClick={() => dispatch(plus())}
               className="active:scale-110"
             >
               <img src={rightArr} alt="" />
             </button>
           </div>
           <div className="imgMiniblock grid grid-cols-3 max-sm:grid-cols-1 max-md:grid-cols-2 justify-center gap-3 pt-3">
-            {/* {caruselData.map((e, i) => {
-              return <Carusel key={i} {...e} />;
-            })} */}
-            <Carusel {...caruselData[0]} />
+            {caruselData.map((e) => {
+              return <Carusel key={e.id} {...e} />;
+            })}
+          </div>
+        </div>
+      </div>
+      <div className="sec5 section">
+        <div className="flex m-[20px] rounded-lg max-md:flex-wrap gap-3 max-md:justify-center justify-between items-center p-[20px_40px] bg-[#fff]">
+          {logos.map((e, i) => {
+            return <img key={i} className="w-[100px] " src={e} alt="" />;
+          })}
+        </div>
+      </div>
+      <div className="sec6 section2 px-[20px]">
+        <div className="block1">
+          <div className="nova-square-regular text-[45px]">
+            Why Choose limogroup?
+          </div>
+          <div className="red-hat-display-200 text-[16px]">
+            Our main advantages are to be chosen by us
+          </div>
+        </div>
+        <div className="block2 grid gap-2 max-md:grid-cols-1 content-center  grid-cols-2">
+          {infoL.map((e, i) => {
+            return <InfoCard key={i} {...e} />;
+          })}
+        </div>
+      </div>
+      <div className="sec7 section2">
+        <div className="block1">
+          <div className="nova-square-regular text-[45px]">Contact us</div>
+          <div className="red-hat-display-200 text-[16px]">
+            Perhaps you have any questions? Please write to us
           </div>
         </div>
       </div>
