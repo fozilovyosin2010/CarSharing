@@ -39,6 +39,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { minus, plus } from "../../reducers/slideId";
 import InfoCard from "../../components/InfoCard";
 
+import homeUber from "../../assets/homeUberDriver.jpg";
+
 const Home = () => {
   // <div className="bg-[url('src/assets/Union1.png')] bg-repeat-y bg-center h-screen"></div>
 
@@ -149,7 +151,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="block2 section2 max-lg:hidden  px-[20px] text-[#fff]">
+        <div className="block2 section2 max-lg:hidden px-[20px] text-[#fff]">
           <div className="miniBlock1 flex">
             <div
               onClick={() => setHeader(false)}
@@ -168,14 +170,14 @@ const Home = () => {
             {header ? (
               <form
                 action=""
-                className="rounded-b-lg flex items-center max-w-full justify-between gap-[20px] px-2 rounded-tr-lg bg-[#484848]  "
+                className="rounded-b-lg flex  items-center max-w-full justify-between px-2 rounded-tr-lg bg-[#484848]  "
               >
-                <div className="flex text-[14px] w-full items-center">
+                <div className="flex text-[14px] justify-between gap-2 w-full items-center">
                   {inpTexts.map((e, i) => {
                     return <InputBox key={i} {...e} id={i} />;
                   })}
                 </div>
-                <button className="p-[15px_32px] font-medium text-[16px] shadow-[0px_0px_5px_#fff] rounded-lg bg-[#fff] text-black">
+                <button className="p-[15px_32px]  font-medium text-[16px] shadow-[0px_0px_5px_#fff] rounded-lg bg-[#fff] text-black">
                   Search
                 </button>
               </form>
@@ -357,12 +359,47 @@ const Home = () => {
           })}
         </div>
       </div>
-      <div className="sec7 section2">
+      <div className="sec7 section2 px-[20px]">
         <div className="block1">
           <div className="nova-square-regular text-[45px]">Contact us</div>
           <div className="red-hat-display-200 text-[16px]">
             Perhaps you have any questions? Please write to us
           </div>
+        </div>
+        <div className="block2 flex pt-4 max-md:flex-col max-md:items-center justify-between gap-[20px] ">
+          <form className="miniBlock1 w-[100%] flex flex-col justify-between  ">
+            <div className="flex flex-col gap-2">
+              <input className="inpStyle" placeholder="Name ..." type="text" />
+              <input
+                className="inpStyle"
+                type="text"
+                placeholder="example@gmail.com"
+              />
+              <input
+                className="inpStyle"
+                type="text"
+                placeholder="+998 90 901  54 55"
+              />
+              <textarea
+                className="inpStyle min-h-[35px] max-h-[100px]"
+                placeholder="Message ..."
+              ></textarea>
+            </div>
+            <div className="flex flex-wrap justify-between gap-1 items-center pt-3">
+              <div className="flex text-[12px] gap-3">
+                <input type="checkbox" />
+                <div>I agree to the Terms of Service and Privacy Policy.</div>
+              </div>
+              <button className="bg-[#fff] text-black font-medium rounded-md text-[12px] p-[8px_32px]">
+                Submit Now
+              </button>
+            </div>
+          </form>
+          <img
+            src={homeUber}
+            className="w-[40%] max-w-full rounded-[15px]"
+            alt=""
+          />
         </div>
       </div>
     </div>

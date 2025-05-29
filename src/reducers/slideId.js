@@ -20,8 +20,11 @@ export const slideId = createSlice({
         state.id--;
       }
     },
+    mirror: (state, action) => {
+      state.id = action.payload;
+    },
   },
 });
 
 export default slideId.reducer;
-export const { plus, minus } = slideId.actions;
+export const { plus, minus, mirror } = slideId.actions;
