@@ -71,3 +71,8 @@ textarea {
   border-radius: 8px;
   padding: 5px 12px;
 }
+
+html {
+  scroll-padding-top: 100px;
+  scroll-behavior: smooth;
+}

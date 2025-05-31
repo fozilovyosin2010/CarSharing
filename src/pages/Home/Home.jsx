@@ -42,8 +42,6 @@ import InfoCard from "../../components/InfoCard";
 import homeUber from "../../assets/homeUberDriver.jpg";
 
 const Home = () => {
-  // <div className="bg-[url('src/assets/Union1.png')] bg-repeat-y bg-center h-screen"></div>
-
   let [header, setHeader] = useState(true);
   let inpTexts = [
     {
@@ -133,10 +131,13 @@ const Home = () => {
   ];
   return (
     <div className="pt-[86px] bg-[url('src/assets/Union1.png')] bg-center bg-repeat-y ">
-      <div className="sec1  mx-[30px] text-black mb-[30px] rounded-[40px] max-h-[580px] bg-[#fff]">
+      <div
+        id="home"
+        className="sec1 mx-[30px] max-md:mx-3 text-black mb-[50px] rounded-[40px] max-h-[580px] bg-[#fff]"
+      >
         <div className="block1 ">
           <div className="miniBlock1 rounded-[40px] flex items-center max-w-[1440px] m-[0_auto] z-10 w-full bg-[url('src/assets/Mers.png')] bg-right h-[500px] bg-no-repeat ">
-            <div className="flex flex-col max-xl:bg-[#ffffff5b] max-md:w-full max-xl:backdrop-blur-[5px] p-[20px] items-start justify-between gap-[20px]">
+            <div className="flex flex-col max-xl:bg-[#ffffff5b] max-md:w-full rounded-lg max-xl:backdrop-blur-[5px] p-[20px] items-start justify-between gap-[20px]">
               <div className="nova-square-regular max-w-[450px] text-[75px]">
                 One global solution
               </div>
@@ -208,7 +209,10 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="sec2 section2 pt-[60px] px-[20px] gap-3 flex flex-col">
+      <div
+        id="about"
+        className="sec2 section2 pt-[40px]  px-[20px] gap-3 flex flex-col"
+      >
         <div className="block1">
           <div className="nova-square-regular text-[45px]">About Us</div>
           <div className="red-hat-display-200 text-[#ddd] text-[16px]">
@@ -246,7 +250,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="sec3 section2 pt-[60px] px-[20px]">
+      <div id="service" className="sec3 section2 pt-[40px] px-[20px]">
         <div className="block1">
           <div className="nova-square-regular text-[45px]">Our Services</div>
           <div className="red-hat-display-200 text-[#ddd] text-[16px]">
@@ -259,7 +263,10 @@ const Home = () => {
           })}
         </div>
       </div>
-      <div className="sec4 overflow-x-hidden pb-[20px] section2 px-[20px] flex flex-col justify-between gap-3">
+      <div
+        id="fleets"
+        className="sec4 overflow-x-hidden pb-[20px] section2 px-[20px] flex flex-col justify-between gap-3"
+      >
         <div className="block1">
           <div className="nova-square-regular text-[45px]">Our Fleets</div>
           <div className="red-hat-display-200 text-[#ddd] text-[16px]">
@@ -369,20 +376,28 @@ const Home = () => {
         <div className="block2 flex pt-4 max-md:flex-col max-md:items-center justify-between gap-[20px] ">
           <form className="miniBlock1 w-[100%] flex flex-col justify-between  ">
             <div className="flex flex-col gap-2">
-              <input className="inpStyle" placeholder="Name ..." type="text" />
+              <input
+                className="inpStyle"
+                placeholder="Name ..."
+                type="text"
+                required
+              />
               <input
                 className="inpStyle"
                 type="text"
                 placeholder="example@gmail.com"
+                required
               />
               <input
                 className="inpStyle"
                 type="text"
                 placeholder="+998 90 901  54 55"
+                required
               />
               <textarea
                 className="inpStyle min-h-[35px] max-h-[100px]"
                 placeholder="Message ..."
+                required
               ></textarea>
             </div>
             <div className="flex flex-wrap justify-between gap-1 items-center pt-3">

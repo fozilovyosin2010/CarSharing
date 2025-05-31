@@ -9,7 +9,12 @@ import location from "../assets/location.png";
 import mail from "../assets/mail.png";
 
 const Layout = () => {
-  let links = ["Home", "About Us", "Our service", "Fleets"];
+  let links = [
+    { name: "Home", link: "#home" },
+    { name: "About Us", link: "#about" },
+    { name: "Our service", link: "#service" },
+    { name: "Fleets", link: "#fleets" },
+  ];
   let [valLink, setValLink] = useState(false);
 
   let tFoot = ["Legal ", "Privacy Policy ", "Terms of Use"];
@@ -78,10 +83,10 @@ const Layout = () => {
                 return (
                   <a
                     key={i}
+                    href={e.link}
                     className="underline text-[14px] font-[400]"
-                    href="#"
                   >
-                    {e}
+                    {e.name}
                   </a>
                 );
               })}
@@ -113,16 +118,17 @@ const Layout = () => {
         >
           <div
             ref={changeMod}
-            className="duration-[0.4s] bg-[#5a565651] flow flex flex-col border-b "
+            className="duration-[0.4s] backdrop-blur-[5px] bg-[#5a565651] flow flex flex-col border-b "
           >
-            {links.map((e) => {
+            {links.map((e, i) => {
               return (
                 <a
-                  href="#"
+                  key={i}
+                  href={e.link}
                   onClick={(e) => setChange(false)}
-                  className="p-[10px_12px] active:bg-[#726d6d51] w-full text-center backdrop-blur-[5px]  text-[#fff]"
+                  className="p-[10px_12px] active:bg-[#726d6d51] w-full text-center text-[#fff]"
                 >
-                  {e}
+                  {e.name}
                 </a>
               );
             })}
