@@ -52,11 +52,11 @@ const Layout = () => {
   return (
     <div className="bg-[#252222] text-[#fff]">
       <div className="grow-[1] min-h-screen flex flex-col pb-2">
-        <div className="header bg-[#00000098] backdrop-blur-[5px] fixed z-[60] w-full top-0 left-0 border-b">
+        <div className="header bg-[#00000098] backdrop-blur-[5px] fixed z-50 w-full top-0 left-0 border-b">
           <div className="section flex items-center justify-between py-5 px-3">
-            <div className="logo">
+            <a href="/" className="logo">
               <img className="w-[150px] " src={logo} alt="" />
-            </div>
+            </a>
 
             <button
               ref={btnChange}
@@ -95,9 +95,11 @@ const Layout = () => {
               <div className="numbers max-md:hidden max-w-[150px] font-medium text-[14px]">
                 +41 79 896 96 96
               </div>
-              <button className="p-[6px_16px] shadow-[0px_0px_5px_#fff] bg-[#fff] text-black rounded-md font-[400]">
-                Contact Us
-              </button>
+              <a href="#contact">
+                <button className="p-[6px_16px] shadow-[0px_0px_5px_#fff] bg-[#fff] text-black rounded-md font-[400]">
+                  Contact Us
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -114,7 +116,7 @@ const Layout = () => {
               }, 200);
             }
           }}
-          className="w-full fixed top-[77px] left-0 min-h-full"
+          className="w-full z-20 fixed top-[77px] left-0 min-h-full"
         >
           <div
             ref={changeMod}

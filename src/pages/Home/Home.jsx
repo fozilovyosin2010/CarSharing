@@ -40,6 +40,7 @@ import { minus, plus } from "../../reducers/slideId";
 import InfoCard from "../../components/InfoCard";
 
 import homeUber from "../../assets/homeUberDriver.jpg";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   let [header, setHeader] = useState(true);
@@ -145,9 +146,11 @@ const Home = () => {
                 Offering the Best Limo Service in Switzerland, Experience it
                 Now!
               </div>
-              <button className="red-hat-display-600 p-[8px_32px] bg-black text-[#fff] rounded-lg">
-                Booking
-              </button>
+              <Link to={"booking"}>
+                <button className="red-hat-display-600 p-[8px_32px] bg-black text-[#fff] rounded-lg">
+                  Booking
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -366,7 +369,7 @@ const Home = () => {
           })}
         </div>
       </div>
-      <div className="sec7 section2 px-[20px]">
+      <div id="contact" className="sec7 section2 px-[20px]">
         <div className="block1">
           <div className="nova-square-regular text-[45px]">Contact us</div>
           <div className="red-hat-display-200 text-[16px]">
