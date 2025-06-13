@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const Steps = ({ id, text, bool }) => {
+import tick from "../assets/tick.svg";
+
+const Steps = ({ id, text }) => {
   let stepId = useSelector((e) => e.stepId.id);
+
+  useEffect(() => {
+    console.log(stepId);
+  }, [stepId]);
 
   return (
     <div className="flex z-10 flex-col items-center">
@@ -13,12 +19,18 @@ const Steps = ({ id, text, bool }) => {
               ? { background: "#fff", color: "black" }
               : { color: "#fff", background: "#464646" }
           }
-          className=" w-[30px]  h-[30px]  m-2 rounded-[50px] red-hat-display-200 flex items-center justify-center"
+          className="max-md:w-[25px]  max-md:h-[25px] w-[30px]  h-[30px]  text-1 m-2 rounded-[50px] red-hat-display-200 flex items-center justify-center"
         >
-          {id}
+          {stepId > id ? (
+            <img src={tick} className="w-[20px] p-1 h-[20px]" />
+          ) : (
+            <div>{id}</div>
+          )}
         </span>
       </div>
-      <div className="red-hat-display-200 text-[12px] text-[#fff]">{text}</div>
+      <div className="red-hat-display-200 text-center text-[10px] text-[#fff]">
+        {text}
+      </div>
     </div>
   );
 };

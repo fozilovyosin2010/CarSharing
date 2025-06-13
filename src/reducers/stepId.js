@@ -4,14 +4,16 @@ const stepId = createSlice({
   name: "stepId",
   initialState: {
     id: 1,
-    passed: [0],
+    // passed: [0],
   },
   reducers: {
     next: (s, a) => {
       s.id++;
+      console.log(s.id);
     },
     prev: (s, a) => {
       s.id--;
+      console.log(s.id);
     },
   },
 });
