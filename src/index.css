@@ -45,7 +45,8 @@
 
 button,
 input,
-textarea {
+textarea,
+select {
   outline: none;
 }
 
@@ -68,9 +69,8 @@ textarea {
   color: #fff;
   background: #3a3a3a;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 5px;
   display: block;
-  padding: 5px 12px;
 }
 
 html {
@@ -80,4 +80,7 @@ html {
 
 .textS {
   color: #fff;
+}
+
+.btnSec {
 }

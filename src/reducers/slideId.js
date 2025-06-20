@@ -20,9 +20,6 @@ export const slideId = createSlice({
         state.id--;
       }
     },
-    mirror: (state, action) => {
-      state.id = action.payload;
-    },
   },
 });
 

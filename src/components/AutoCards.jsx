@@ -2,14 +2,22 @@ import React from "react";
 import vector from "../assets/vectorL.svg";
 import partfel from "../assets/bag.png";
 import threePerson from "../assets/persons.png";
+import { useDispatch, useSelector } from "react-redux";
+import { selCarId } from "../reducers/stepId";
 
-const AutoCards = ({ img, price, title, pasanger, bag }) => {
+const AutoCards = ({ id, img, price, title, pasanger, bag }) => {
+  let disP = useDispatch();
+  let selCar = useSelector((e) => e.stepId.carId);
   return (
-    <div className="border-b max-md:flex-wrap pt-0 p-2 border-dashed flex items-center gap-[30px] justify-between text-[#fff]">
+    <div
+      className={`border-b max-md:flex-wrap rounded-tr-md rounded-tl-md p-2 border-dashed ${
+        selCar == id ? "bg-[#4b4b4d]" : "bg-[#28282828]"
+      } flex items-center gap-[30px] duration-300 justify-between text-[#fff]`}
+    >
       <div className="rounded-lg max-md:w-full bg-[#333333]">
         <img
           src={img}
-          className="w-[400px] max-md:w-full max-md:h-auto h-[200px] p-3"
+          className="w-[400px] m-[0_auto] max-md:h-auto h-[200px] p-3"
           alt=""
         />
       </div>
@@ -18,7 +26,14 @@ const AutoCards = ({ img, price, title, pasanger, bag }) => {
           <h1 className="red-hat-display-200 text-[20px] max-w-[150px]">
             {title}
           </h1>
-          <button className="p-[8px_32px] red-hat-display-600 text-[14px] bg-[#fff] text-black rounded-md">
+          <button
+            onClick={() => disP(selCarId(id))}
+            className={`p-[8px_32px] ${
+              selCar == id
+                ? "bg-gradient-to-br from-[#888] text-[#fff] to-[#282828]"
+                : "bg-[#fff] text-black "
+            } red-hat-display-600 text-[14px] rounded-md`}
+          >
             Select
           </button>
         </div>

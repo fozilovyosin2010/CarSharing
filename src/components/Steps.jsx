@@ -6,10 +6,6 @@ import tick from "../assets/tick.svg";
 const Steps = ({ id, text }) => {
   let stepId = useSelector((e) => e.stepId.id);
 
-  useEffect(() => {
-    console.log(stepId);
-  }, [stepId]);
-
   return (
     <div className="flex z-10 flex-col items-center">
       <div className="z-10 bg-[#282828] p-[2px]">
