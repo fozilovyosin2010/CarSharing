@@ -160,6 +160,7 @@ const Booking = () => {
         </div>
       </div>
 
+      {/* steps */}
       <div className="main max-w-[1200px] m-[0_auto] pt-[20px] text-black">
         {/* step1 */}
         <form
@@ -272,8 +273,8 @@ const Booking = () => {
             stepId !== 2 ? "hidden" : null
           } max-w-[1340px] m-[0_auto]`}
         >
-          <div className="block1 flex max-lg:flex-wrap items-start justify-center gap-[20px]">
-            <div className="miniBlock1 max-lg:w-[70%] w-[25%] ">
+          <div className="block1 flex max-md:flex-wrap items-start justify-center gap-[20px]">
+            <div className="miniBlock1 max-md:w-full p-2 w-[250px] ">
               <div className="flex flex-col gap-4 bg-[#333333] rounded-lg p-[20px]">
                 {inp2Data.map((e, i) => {
                   return <InpStep2 key={i} {...e} />;
@@ -329,14 +330,14 @@ const Booking = () => {
             </button>
           </div>
         </div>
-        {/*  */}
+        {/*here  */}
         {/* step3 */}
         <form
           onSubmit={addDataStep3}
           className={`${stepId !== 3 ? "hidden" : null} flex flex-col gap-3`}
         >
-          <div className="block1 flex gap-[30px] justify-between">
-            <div className="miniBlock1 w-[20%]">
+          <div className="block1 flex max-md:flex-wrap max-md:justify-center gap-[20px] justify-between">
+            <div className="miniBlock1 max-md:w-full  w-[30%]">
               <div className="flex flex-col gap-4 bg-[#333333] rounded-lg p-[20px]">
                 {inp2Data.map((e, i) => {
                   return <InpStep2 key={i} {...e} />;
@@ -363,7 +364,7 @@ const Booking = () => {
                 <div>450$</div>
               </div>
             </div>
-            <div className="miniBlock2 w-[80%] flex flex-col justify-between gap-3">
+            <div className="miniBlock2 w-[70%] max-md:w-full flex flex-col justify-between gap-3">
               <div>
                 <div className="mb-3 text-[#fff] red-hat-display-600 text-[14px]">
                   CONTACT DETAILS
@@ -480,8 +481,8 @@ const Booking = () => {
         {/* step4 */}
         <div className={` ${stepId == 4 ? "block" : "hidden"}`}>
           {/* blocks */}
-          <div className="flex gap-3 items-start justify-between">
-            <div className="block1  flex w-[30%] flex-col gap-3">
+          <div className="flex gap-3 items-start max-sm:flex-col justify-between">
+            <div className="block1 max-md:w-full flex w-[30%] flex-col gap-3">
               <div className="miniBlock1 rounded-lg bg-[#333333] flex p-[20px] gap-4 flex-col">
                 <p className="red-hat-display-600 text-[16px] text-[#fff]">
                   Contact & Billing Info
@@ -509,37 +510,41 @@ const Booking = () => {
               </div>
             </div>
 
-            <div className="block2 rounded-lg w-[30%] bg-[#333333] p-[20px]">
-              <div className="flex flex-col  gap-4 rounded-lg p-[20px]">
-                {inp2Data.map((e, i) => {
-                  return <InpStep2 key={i} {...e} />;
-                })}
+            <div className="flex justify-between max-md:w-full gap-3  max-md:flex-col">
+              <div className="block2 rounded-lg w-[50%] max-md:w-full bg-[#333333] p-[20px]">
+                <div className="flex flex-col  gap-4 rounded-lg p-[20px]">
+                  {inp2Data.map((e, i) => {
+                    return <InpStep2 key={i} {...e} />;
+                  })}
+                </div>
+                <BtnEdit />
               </div>
-              <BtnEdit />
+              {/* block3 */}
+              {selCar > 0 ? (
+                <div className="block3 flex flex-col gap-3 max-md:w-full w-[50%] relative">
+                  <div className="miniBlock1 rounded-lg bg-[#333333] p-[20px]">
+                    <div className="absolute top-3 left-3">
+                      <BtnEdit />
+                    </div>
+                    <img src={carData[selCar - 1].img} className="w-full" />
+                  </div>
+                  <div className="miniBlock2">
+                    <div className="mt-3 pt-3  flex text-[#fff] justify-between text-[14px] red-hat-display-200">
+                      <div className="red-hat-display-600">
+                        Selected Vehicle
+                      </div>
+                      <div className="red-hat-display-600">{`${
+                        carData[selCar - 1].price
+                      }`}</div>
+                    </div>
+                    <div className="border-t border-dashed mt-3 pt-3 red-hat-display-600 flex text-[#fff] justify-between text-[14px] red-hat-display-200">
+                      <div className="red-hat-display-600">Total</div>
+                      <div className="red-hat-display-600">450$</div>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
             </div>
-            {/* block3 */}
-            {selCar > 0 ? (
-              <div className="block3 flex flex-col gap-3 w-[40%] relative">
-                <div className="miniBlock1 rounded-lg bg-[#333333] p-[20px]">
-                  <div className="absolute top-3 left-3">
-                    <BtnEdit />
-                  </div>
-                  <img src={carData[selCar - 1].img} className="w-full" />
-                </div>
-                <div className="miniBlock2">
-                  <div className="mt-3 pt-3  flex text-[#fff] justify-between text-[14px] red-hat-display-200">
-                    <div className="red-hat-display-600">Selected Vehicle</div>
-                    <div className="red-hat-display-600">{`${
-                      carData[selCar - 1].price
-                    }`}</div>
-                  </div>
-                  <div className="border-t border-dashed mt-3 pt-3 red-hat-display-600 flex text-[#fff] justify-between text-[14px] red-hat-display-200">
-                    <div className="red-hat-display-600">Total</div>
-                    <div className="red-hat-display-600">450$</div>
-                  </div>
-                </div>
-              </div>
-            ) : null}
           </div>
           <div className="btns flex justify-between pt-[20px]">
             <button
