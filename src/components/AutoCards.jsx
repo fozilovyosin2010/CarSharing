@@ -5,7 +5,7 @@ import threePerson from "../assets/persons.png";
 import { useDispatch, useSelector } from "react-redux";
 import { selCarId } from "../reducers/stepId";
 
-const AutoCards = ({ id, img, price, title, pasanger, bag }) => {
+const AutoCards = ({ id, img, price, title, pasanger, bag, bool }) => {
   let disP = useDispatch();
   let selCar = useSelector((e) => e.stepId.carId);
   return (
@@ -14,7 +14,7 @@ const AutoCards = ({ id, img, price, title, pasanger, bag }) => {
         selCar == id ? "bg-[#4b4b4d]" : "bg-[#28282828]"
       } flex items-center gap-[30px] duration-300 justify-between text-[#fff]`}
     >
-      <div className="rounded-lg max-md:w-full bg-[#333333]">
+      <div className={`rounded-lg max-md:w-full bg-[#333333]`}>
         <img
           src={img}
           className="w-[400px] m-[0_auto] max-md:h-auto h-[200px] p-3"

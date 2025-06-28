@@ -4,6 +4,7 @@ export const slideId = createSlice({
   name: "slideId",
   initialState: {
     id: 0,
+    swipeId: 1,
   },
   reducers: {
     plus: (state, action) => {
@@ -19,6 +20,9 @@ export const slideId = createSlice({
       } else {
         state.id--;
       }
+    },
+    mirror: (state, action) => {
+      state.swipeId = action.payload;
     },
   },
 });

@@ -12,10 +12,14 @@ import InpStep2 from "../../components/InpStep2";
 
 import stripe from "../../assets/stripe.png";
 import paypal from "../../assets/paypal.png";
-import BtnEdit from "../../components/BtnEdit";
+import Btn from "../../components/Btn";
 
 import vectorL from "../../assets/vectorL.svg";
 import vectorR from "../../assets/vectorR.svg";
+import Swiper from "../../components/CaruselCar";
+
+import partfel from "../../assets/bag.png";
+import threePerson from "../../assets/persons.png";
 
 const Booking = () => {
   let stepsData = [
@@ -142,10 +146,12 @@ const Booking = () => {
     }
   }
 
-  useEffect(() => {
-    console.log(inp3Data);
-  }, [inp3Data]);
+  // here editmodal
+  let [editMod, setEditMod] = useState(true);
 
+  let root = window.document.documentElement;
+
+  let swipeId = useSelector((e) => e.slideId.swipeId);
   return (
     <div className="pt-[90px] px-[20px] overflow-x-hidden">
       <div className="px-[20px] pb-[20px] ">
@@ -160,6 +166,7 @@ const Booking = () => {
         </div>
       </div>
 
+      {/* edit logic! */}
       {/* steps */}
       <div className="main max-w-[1200px] m-[0_auto] pt-[20px] text-black">
         {/* step1 */}
@@ -492,7 +499,7 @@ const Booking = () => {
                     return <InpStep2 {...e} />;
                   })}
                 </div>
-                <BtnEdit />
+                <Btn text="Edit" />
               </div>
               <div className="miniBlock2 flex flex-col gap-4  rounded-lg bg-[#333333] pt-0 p-[20px]">
                 <div className="#B3B3B3 red-hat-display-600 text-[#fff] py-[20px]">
@@ -506,25 +513,25 @@ const Booking = () => {
                     {card}
                   </div>
                 </div>
-                <BtnEdit />
+                <Btn text="Edit" />
               </div>
             </div>
 
-            <div className="flex justify-between max-md:w-full gap-3  max-md:flex-col">
+            <div className="block2 flex justify-between w-full gap-3  max-md:flex-col">
               <div className="block2 rounded-lg w-[50%] max-md:w-full bg-[#333333] p-[20px]">
                 <div className="flex flex-col  gap-4 rounded-lg p-[20px]">
                   {inp2Data.map((e, i) => {
                     return <InpStep2 key={i} {...e} />;
                   })}
                 </div>
-                <BtnEdit />
+                <Btn text="Edit" />
               </div>
               {/* block3 */}
               {selCar > 0 ? (
                 <div className="block3 flex flex-col gap-3 max-md:w-full w-[50%] relative">
                   <div className="miniBlock1 rounded-lg bg-[#333333] p-[20px]">
                     <div className="absolute top-3 left-3">
-                      <BtnEdit />
+                      <Btn text="Edit" />
                     </div>
                     <img src={carData[selCar - 1].img} className="w-full" />
                   </div>
@@ -565,6 +572,46 @@ const Booking = () => {
           </div>
         </div>
       </div>
+      {editMod ? (
+        <div className="w-full h-full flex  fixed items-center justify-center top-0 z-40 bottom-0 left-0 bg-[#00000053]">
+          <div className="w-full flex flex-col items-center bg-[#2e2c2c] p-[10px_20px] section2">
+            <div className="w-full m-[20px]  relative flex ">
+              <Swiper />
+            </div>
+            <div className="container flex justify-between gap-3 items-center">
+              <div className="block1">
+                <div className="red-hat-display-600 line-clamp-1">
+                  {carData[swipeId - 1].title}
+                </div>
+                <div className="red-hat-display-600">
+                  {carData[swipeId - 1].price}
+                </div>
+              </div>
+
+              {/* here */}
+              <button
+                onClick={() => {
+                  if (swipeId !== selCar + 1) {
+                    setEditMod(false);
+                    disP(selCar(swipeId - 1));
+                  }
+                }}
+                className={`red-hat-display-600 flex justify-center ${
+                  swipeId == selCar + 1
+                    ? "bg-gradient-to-l border border-[#5b5858]  from-[#444] to-[#282828]"
+                    : null
+                } active:bg-[#000] active:text-[#fff] w-[70px] rounded-md text-black bg-[#fff] p-[8px_16px] text-[14px]`}
+              >
+                <div
+                  className={`${swipeId == selCar + 1 ? "text-[#fff]" : null}`}
+                >
+                  {`Select${swipeId == selCar + 1 ? "ed" : ""}`}
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
