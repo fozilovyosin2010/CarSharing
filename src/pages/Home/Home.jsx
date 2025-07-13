@@ -137,7 +137,7 @@ const Home = () => {
         className="sec1 mx-[30px] max-md:mx-3 text-black mb-[50px] rounded-[40px] max-h-[580px] bg-[#fff]"
       >
         <div className="block1 ">
-          <div className="miniBlock1 rounded-[40px] flex items-center max-w-[1440px] m-[0_auto] z-10 w-full bg-[url('src/assets/Mers.png')] bg-right h-[500px] bg-no-repeat ">
+          <div className="miniBlock1 rounded-[40px] flex items-center max-w-[1440px] m-[0_auto] z-10 w-full bg-[url('./src/assets/Mers.png')] bg-right h-[500px] bg-no-repeat ">
             <div className="flex flex-col max-xl:bg-[#ffffff5b] max-md:w-full rounded-lg max-xl:backdrop-blur-[5px] p-[20px] items-start justify-between gap-[20px]">
               <div className="nova-square-regular max-w-[450px] text-[75px]">
                 One global solution
