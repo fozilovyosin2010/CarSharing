@@ -8,7 +8,7 @@ import img1 from "../../assets/472-transfer-to-dalaman 1.png";
 import img2 from "../../assets/Car5 1.png";
 import img3 from "../../assets/Tips-for-a-Successful-Airport-Transfer-Limousine-Service 1.png";
 import img4 from "../../assets/Reasons.png";
-import SerCards from "../../components/serCards";
+import SerCards from "../../components/SerCards";
 
 import BenzV2 from "../../assets/Benz-2.png";
 

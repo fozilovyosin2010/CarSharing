@@ -124,7 +124,7 @@ const Booking = () => {
     },
   ];
 
-  let [totalTime, setTotalTime] = useState("01:12");
+  let [totalTime, setTotalTime] = useState("0:00");
   let [totalDis, setTotalDis] = useState(0);
 
   let [switchF, setSwitchF] = useState("hourly");
@@ -284,7 +284,6 @@ const Booking = () => {
               name="pickL"
               className="border p-[10px_20px] border-[#5c5757] inpStyle"
               type="text"
-              value={"dw"}
               placeholder="Pick up location"
               required
             />
@@ -293,7 +292,6 @@ const Booking = () => {
               id="dropL"
               className="border p-[10px_20px] border-[#5c5757] inpStyle"
               type="text"
-              value={"dw"}
               placeholder="Drop off location"
               required
             />
@@ -305,7 +303,6 @@ const Booking = () => {
               <input
                 id="pickD"
                 type="date"
-                value={"2025-09-09"}
                 min={minDate(new Date())}
                 max={maxDate(new Date())}
                 className="bg-transparent pt-1"
@@ -317,7 +314,6 @@ const Booking = () => {
                 Pick up time
               </span>
               <input
-                value={"06:00"}
                 id="pickT"
                 max={"23:00"}
                 min={"06:00"}
@@ -485,7 +481,6 @@ const Booking = () => {
                   <input
                     required
                     name="inpFName"
-                    value={"Yosin"}
                     className="inpStyle p-[10px_20px]"
                     placeholder="First Name"
                     type="text"
@@ -493,7 +488,6 @@ const Booking = () => {
                   <input
                     required
                     name="inpLName"
-                    value={"Fozilov"}
                     className="inpStyle p-[10px_20px]"
                     placeholder="Last Name"
                     type="text"
@@ -501,7 +495,6 @@ const Booking = () => {
                   <input
                     name="inpEmail"
                     required
-                    value={"yosinf@gmail.com"}
                     className="inpStyle p-[10px_20px]"
                     placeholder="E-mail address"
                     type="email"
@@ -509,7 +502,6 @@ const Booking = () => {
                   <input
                     name="inpPhone"
                     required
-                    value={"123456789"}
                     className="inpStyle p-[10px_20px]"
                     placeholder="Phone number"
                     type="number"
@@ -517,7 +509,6 @@ const Booking = () => {
                   />
                   <textarea
                     name="inpComments"
-                    value={"defwekgiwrog"}
                     required
                     className="inpStyle p-[10px_20px] col-span-2 min-h-[100px] max-h-[150px]"
                     placeholder="Comments ..."
