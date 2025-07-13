@@ -387,13 +387,13 @@ const Home = () => {
               />
               <input
                 className="inpStyle"
-                type="text"
+                type="email"
                 placeholder="example@gmail.com"
                 required
               />
               <input
                 className="inpStyle"
-                type="text"
+                type="number"
                 placeholder="+998 90 901  54 55"
                 required
               />

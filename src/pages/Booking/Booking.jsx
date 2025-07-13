@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import salon from "../../assets/salon1.png";
 import Steps from "../../components/Steps";
 import { useDispatch, useSelector } from "react-redux";
-import { next, prev } from "../../reducers/stepId";
+import { next, prev, setSelCarId } from "../../reducers/stepId";
 
 import mersB from "../../assets/Benz-V-Class.png";
 import mersB2 from "../../assets/fcf3a5b062ce20bf24f27c6e8005d8e3 1.png";
@@ -12,14 +12,18 @@ import InpStep2 from "../../components/InpStep2";
 
 import stripe from "../../assets/stripe.png";
 import paypal from "../../assets/paypal.png";
-import Btn from "../../components/Btn";
 
 import vectorL from "../../assets/vectorL.svg";
 import vectorR from "../../assets/vectorR.svg";
 import Swiper from "../../components/CaruselCar";
 
-import partfel from "../../assets/bag.png";
-import threePerson from "../../assets/persons.png";
+import { mirror } from "../../reducers/slideId";
+
+import Cartier from "../../assets/1200px-Cartier_logo.png";
+import Emirates from "../../assets/Emirates.png";
+import IWC from "../../assets/IWC.png";
+import Logo_Chopard from "../../assets/Logo_Chopard.png";
+import Logo_Genève from "../../assets/Logo_Genève_Aéroport 1.png";
 
 const Booking = () => {
   let stepsData = [
@@ -54,11 +58,11 @@ const Booking = () => {
     event.preventDefault();
 
     let data = {
-      service_type: event.target["journeyT"].value,
-      pick_up_location: event.target["pickL"].value,
-      drop_off_location: event.target["dropL"].value,
-      pick_up_date: event.target["pickD"].value,
-      pick_up_time: event.target["pickT"].value,
+      service_type: event.target["journeyT"].value.trim(),
+      pick_up_location: event.target["pickL"].value.trim(),
+      drop_off_location: event.target["dropL"].value.trim(),
+      pick_up_date: event.target["pickD"].value.trim(),
+      pick_up_time: event.target["pickT"].value.trim(),
       total_time: totalTime
         .split(":")
         .map((e, i) => {
@@ -78,12 +82,19 @@ const Booking = () => {
   }
 
   function maxDate(date) {
-    let arr = [date.getFullYear(), date.getMonth(), date.getDate()];
-    let arr2 = arr.map((e, i) => {
-      return i == 0 ? e : i == 1 ? 0 + `${(e += 4)}` : 0 + `${e}`;
-    });
+    let arr = [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(
+      (e, i) => {
+        return i == 1 ? (e += 4) : e;
+      }
+    );
 
-    return arr2.join("-");
+    return arr
+      .map((e, i) => {
+        return e > 9 ? `${e}` : `0${e}`;
+      })
+      .join("-");
+
+    // return arr2.join("-");
   }
 
   let carData = [
@@ -134,11 +145,11 @@ const Booking = () => {
     event.preventDefault();
     if (card !== "") {
       let data = {
-        First_Name: event.target["inpFName"].value,
-        Last_Name: event.target["inpLName"].value,
-        EMail: event.target["inpEmail"].value,
-        Phone: event.target["inpPhone"].value,
-        Comments: event.target["inpComments"].value,
+        First_Name: event.target["inpFName"].value.trim(),
+        Last_Name: event.target["inpLName"].value.trim(),
+        EMail: event.target["inpEmail"].value.trim(),
+        Phone: event.target["inpPhone"].value.trim(),
+        Comments: event.target["inpComments"].value.trim(),
       };
 
       setInp3Data(objToArr(data));
@@ -146,12 +157,105 @@ const Booking = () => {
     }
   }
 
-  // here editmodal
-  let [editMod, setEditMod] = useState(true);
+  //for payment method
+  let [editModPay, setEditModPay] = useState(false);
+  let [paySel, setPaySel] = useState("paypal");
+  let editModPayRef = useRef();
+
+  let [editMod4, setEditMod4] = useState(false);
+  let editMod4Ref = useRef();
 
   let root = window.document.documentElement;
 
   let swipeId = useSelector((e) => e.slideId.swipeId);
+
+  // for step1 form
+  let [editMod1, setEditMod1] = useState(false);
+  let editMod1Ref = useRef();
+
+  let editMod1FormCheck = useRef();
+
+  function openEditMod1(data) {
+    setEditMod1(true);
+
+    setTimeout(() => {
+      editMod1FormCheck.current["pickL"].value = data[1].text;
+      editMod1FormCheck.current["dropL"].value = data[2].text;
+      editMod1FormCheck.current["pickD"].value = data[3].text;
+      editMod1FormCheck.current["pickT"].value = data[4].text;
+    }, 100);
+  }
+
+  function editMod1Data(event) {
+    event.preventDefault();
+
+    let data = {
+      service_type: switchF,
+      pick_up_location: event.target["pickL"].value.trim(),
+      drop_off_location: event.target["dropL"].value.trim(),
+      pick_up_date: event.target["pickD"].value.trim(),
+      pick_up_time: event.target["pickT"].value.trim(),
+      total_time: totalTime
+        .split(":")
+        .map((e, i) => {
+          return i == 0 ? Number(e) + "h" : Number(e) + "m";
+        })
+        .join(", "),
+      total_distance: totalDis + "km",
+    };
+    setInp2Data(objToArr(data));
+
+    setEditMod1(false);
+  }
+
+  // for step3
+  let [editMod3, setEditMod3] = useState(false);
+  let editMod3FormRef = useRef();
+  let editMod3Ref = useRef();
+
+  let openEditMod3 = (data) => {
+    setEditMod3(true);
+
+    setTimeout(() => {
+      editMod3FormRef.current["inpFName"].value = data[0].text;
+      editMod3FormRef.current["inpLName"].value = data[1].text;
+      editMod3FormRef.current["inpEmail"].value = data[2].text;
+      editMod3FormRef.current["inpPhone"].value = data[3].text;
+      editMod3FormRef.current["inpComments"].value = data[4].text;
+    }, 100);
+  };
+
+  // editdata for editmod3
+  let editMod3Data = (event) => {
+    event.preventDefault();
+    let data = {
+      First_Name: event.target["inpFName"].value.trim(),
+      Last_Name: event.target["inpLName"].value.trim(),
+      EMail: event.target["inpEmail"].value.trim(),
+      Phone: event.target["inpPhone"].value.trim(),
+      Comments: event.target["inpComments"].value.trim(),
+    };
+    setInp3Data(objToArr(data));
+    console.log(objToArr(data));
+
+    setEditMod3(false);
+  };
+
+  // overflow visible/hidden
+  useEffect(() => {
+    root.style.overflowY = editMod4
+      ? "hidden"
+      : editModPay
+      ? "hidden"
+      : editMod1
+      ? "hidden"
+      : editMod3
+      ? "hidden"
+      : "visible";
+  }, [editMod4, editModPay, editMod1, editMod3]);
+
+  let logos = [Logo_Chopard, Logo_Genève, Emirates, IWC, Cartier];
+
   return (
     <div className="pt-[90px] px-[20px] overflow-x-hidden">
       <div className="px-[20px] pb-[20px] ">
@@ -166,9 +270,8 @@ const Booking = () => {
         </div>
       </div>
 
-      {/* edit logic! */}
       {/* steps */}
-      <div className="main max-w-[1200px] m-[0_auto] pt-[20px] text-black">
+      <div className="main duration-300 max-w-[1200px] m-[0_auto] pt-[20px] text-black">
         {/* step1 */}
         <form
           onSubmit={addData}
@@ -195,21 +298,22 @@ const Booking = () => {
               required
             />
 
-            <div className="relative p-[10px_20px] flex z-20 border border-[#5c5757] flex-col inpStyle gap-1 ">
-              <span className="absolute px-2 z-30 top-[-10px] red-hat-display-600 text-[14px]">
+            <div className="relative p-[10px_20px] flex border border-[#5c5757] flex-col inpStyle gap-1 ">
+              <span className="absolute px-2 top-[-10px] red-hat-display-600 text-[14px]">
                 Pick up date
               </span>
               <input
                 id="pickD"
                 type="date"
-                value={"2025-06-09"}
+                value={"2025-09-09"}
                 min={minDate(new Date())}
                 max={maxDate(new Date())}
                 className="bg-transparent pt-1"
+                required
               />
             </div>
-            <div className="relative p-[10px_20px] flex z-20 border border-[#5c5757] flex-col inpStyle gap-1 ">
-              <span className="absolute px-2 z-30 top-[-10px] red-hat-display-600 text-[14px]">
+            <div className="relative p-[10px_20px] flex border border-[#5c5757] flex-col inpStyle gap-1 ">
+              <span className="absolute px-2 top-[-10px] red-hat-display-600 text-[14px]">
                 Pick up time
               </span>
               <input
@@ -235,8 +339,8 @@ const Booking = () => {
               <option value="distance">Distance</option>
             </select>
             {switchF == "hourly" ? (
-              <div className="relative p-[10px_20px] flex z-20 border border-[#5c5757] flex-col inpStyle gap-1 ">
-                <span className="absolute px-2 z-30 top-[-10px] red-hat-display-600 text-[14px]">
+              <div className="relative p-[10px_20px] flex border border-[#5c5757] flex-col inpStyle gap-1 ">
+                <span className="absolute px-2 top-[-10px] red-hat-display-600 text-[14px]">
                   Total time
                 </span>
                 <input
@@ -252,7 +356,7 @@ const Booking = () => {
             ) : (
               <input
                 type="number"
-                className="inpStyle"
+                className="inpStyle p-[10px_20px]"
                 max={25}
                 value={totalDis}
                 onChange={(e) => setTotalDis(e.target.value)}
@@ -263,7 +367,7 @@ const Booking = () => {
               />
             )}
           </div>
-          <div className="btn flex justify-between pt-[20px]">
+          <div className="flex justify-between pt-[20px]">
             <div></div>
             <button
               type="submit"
@@ -337,7 +441,7 @@ const Booking = () => {
             </button>
           </div>
         </div>
-        {/*here  */}
+
         {/* step3 */}
         <form
           onSubmit={addDataStep3}
@@ -495,11 +599,16 @@ const Booking = () => {
                   Contact & Billing Info
                 </p>
                 <div className="flex flex-col gap-4  rounded-lg ">
-                  {inp3Data.map((e) => {
-                    return <InpStep2 {...e} />;
+                  {inp3Data.map((e, i) => {
+                    return <InpStep2 key={i} {...e} />;
                   })}
                 </div>
-                <Btn text="Edit" />
+                <button
+                  onClick={() => openEditMod3(inp3Data)}
+                  className={`red-hat-display-600 flex justify-center  active:bg-[#000] active:text-[#fff] w-[70px] rounded-md text-black bg-[#fff] p-[8px_16px] text-[14px] `}
+                >
+                  Edit
+                </button>
               </div>
               <div className="miniBlock2 flex flex-col gap-4  rounded-lg bg-[#333333] pt-0 p-[20px]">
                 <div className="#B3B3B3 red-hat-display-600 text-[#fff] py-[20px]">
@@ -513,25 +622,43 @@ const Booking = () => {
                     {card}
                   </div>
                 </div>
-                <Btn text="Edit" />
+                <button
+                  onClick={() => setEditModPay(true)}
+                  className={`red-hat-display-600 flex justify-center  active:bg-[#000] active:text-[#fff] w-[70px] rounded-md text-black bg-[#fff] p-[8px_16px] text-[14px] `}
+                >
+                  Edit
+                </button>
               </div>
             </div>
 
-            <div className="block2 flex justify-between w-full gap-3  max-md:flex-col">
+            {/* block2/block3 */}
+            <div className="flex justify-between w-full gap-3  max-md:flex-col">
               <div className="block2 rounded-lg w-[50%] max-md:w-full bg-[#333333] p-[20px]">
                 <div className="flex flex-col  gap-4 rounded-lg p-[20px]">
                   {inp2Data.map((e, i) => {
                     return <InpStep2 key={i} {...e} />;
                   })}
                 </div>
-                <Btn text="Edit" />
+                <button
+                  onClick={() => {
+                    openEditMod1(inp2Data);
+                  }}
+                  className={`red-hat-display-600 flex justify-center  active:bg-[#000] active:text-[#fff] w-[70px] rounded-md text-black bg-[#fff] p-[8px_16px] text-[14px] `}
+                >
+                  Edit
+                </button>
               </div>
               {/* block3 */}
               {selCar > 0 ? (
                 <div className="block3 flex flex-col gap-3 max-md:w-full w-[50%] relative">
                   <div className="miniBlock1 rounded-lg bg-[#333333] p-[20px]">
                     <div className="absolute top-3 left-3">
-                      <Btn text="Edit" />
+                      <button
+                        onClick={() => setEditMod4(true)}
+                        className={`red-hat-display-600 flex justify-center  active:bg-[#000] active:text-[#fff] w-[70px] rounded-md text-black bg-[#fff] p-[8px_16px] text-[14px] `}
+                      >
+                        Edit
+                      </button>
                     </div>
                     <img src={carData[selCar - 1].img} className="w-full" />
                   </div>
@@ -572,43 +699,335 @@ const Booking = () => {
           </div>
         </div>
       </div>
-      {editMod ? (
-        <div className="w-full h-full flex  fixed items-center justify-center top-0 z-40 bottom-0 left-0 bg-[#00000053]">
-          <div className="w-full flex flex-col items-center bg-[#2e2c2c] p-[10px_20px] section2">
-            <div className="w-full m-[20px]  relative flex ">
-              <Swiper />
-            </div>
-            <div className="container flex justify-between gap-3 items-center">
-              <div className="block1">
-                <div className="red-hat-display-600 line-clamp-1">
-                  {carData[swipeId - 1].title}
-                </div>
-                <div className="red-hat-display-600">
-                  {carData[swipeId - 1].price}
-                </div>
-              </div>
 
-              {/* here */}
+      <div className="flex m-[20px] rounded-lg max-md:flex-wrap gap-3 max-md:justify-center justify-between items-center p-[20px_40px] bg-[#fff]">
+        {logos.map((e, i) => {
+          return <img key={i} className="w-[100px] " src={e} alt="" />;
+        })}
+      </div>
+
+      {/* car */}
+      {editMod4 ? (
+        <div
+          ref={editMod4Ref}
+          onClick={(e) => {
+            if (e.target == editMod4Ref.current) {
+              setEditMod4(false);
+            }
+          }}
+          className="w-full flex items-center h-full justify-center fixed z-40 bottom-0 left-0 bg-[#00000053]"
+        >
+          <div className="w-[700px] max-w-[calc(100%-50px)] bg-[#2e2c2c] mx-[20px]">
+            <div className="flex justify-end p-2">
               <button
-                onClick={() => {
-                  if (swipeId !== selCar + 1) {
-                    setEditMod(false);
-                    disP(selCar(swipeId - 1));
-                  }
-                }}
-                className={`red-hat-display-600 flex justify-center ${
-                  swipeId == selCar + 1
-                    ? "bg-gradient-to-l border border-[#5b5858]  from-[#444] to-[#282828]"
-                    : null
-                } active:bg-[#000] active:text-[#fff] w-[70px] rounded-md text-black bg-[#fff] p-[8px_16px] text-[14px]`}
+                onClick={() => setEditMod4(false)}
+                className="border flex justify-center items-center p-1 rounded-md"
               >
-                <div
-                  className={`${swipeId == selCar + 1 ? "text-[#fff]" : null}`}
-                >
-                  {`Select${swipeId == selCar + 1 ? "ed" : ""}`}
-                </div>
+                <i className="bx bx-x"></i>
               </button>
             </div>
+            {/* swipe */}
+            <div className="w-full flex flex-col items-center section2 p-3">
+              <div className="w-full m-[20px]  relative flex ">
+                <Swiper />
+              </div>
+              <div className="container flex justify-between gap-3 items-center">
+                <div className="block1">
+                  <div className="red-hat-display-600 line-clamp-1">
+                    {carData[swipeId - 1].title}
+                  </div>
+                  <div className="red-hat-display-600">
+                    {carData[swipeId - 1].price}
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => {
+                    disP(setSelCarId(swipeId));
+                    setEditMod4(false);
+                    disP(mirror(1));
+                  }}
+                  className={`red-hat-display-600 flex justify-center ${
+                    swipeId == selCar
+                      ? "bg-gradient-to-tr from-[#444] border border-[#686666] text-[#fff] to-slate-800"
+                      : "text-black"
+                  } active:bg-[#000] active:text-[#fff] w-[70px] rounded-md  bg-[#fff] p-[8px_16px] text-[14px]`}
+                >
+                  <div>
+                    {/* select */}
+                    {`Select${swipeId == selCar ? "ed" : ""}`}
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      {editModPay ? (
+        <div
+          onClick={(e) => {
+            if (e.target == editModPayRef.current) {
+              setEditModPay(false);
+            }
+          }}
+          ref={editModPayRef}
+          className="w-full z-10 bg-[#00000053] flex justify-center items-center h-full fixed top-0 left-0"
+        >
+          <div className="w-[500px] bg-[#2e2c2c] m-3">
+            <div className="flex justify-end p-2">
+              <button
+                onClick={() => setEditModPay(false)}
+                className="border flex justify-center items-center p-1 rounded-md"
+              >
+                <i className="bx bx-x"></i>
+              </button>
+            </div>
+            <div className="flex flex-col gap-3">
+              <div className="px-2">
+                <div className="red-hat-display-600 px-2">
+                  Edit payment method
+                </div>
+                {/* select */}
+                <div className="flex justify-center">
+                  <select
+                    value={paySel}
+                    onChange={(e) => setPaySel(e.target.value)}
+                    className="bg-gradient-to-r mx-2 rounded-md red-hat-display-600 from-[#252424] to-[#595656] border w-full p-[8px_32px]"
+                  >
+                    <option className="text-black" value="paypal">
+                      PayPal
+                    </option>
+                    <option className="text-black" value="stripe">
+                      Stripe
+                    </option>
+                  </select>
+                </div>
+              </div>
+              {/* btns yes/no */}
+              <div className="flex">
+                <button
+                  onClick={() => {
+                    setCard(paySel);
+                    setEditModPay(false);
+                  }}
+                  className="btn text-blue-500 rounded-bl-md"
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={() => setEditModPay(false)}
+                  className="btn text-red-500 rounded-br-md"
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {editMod1 ? (
+        <div
+          onClick={(e) => {
+            if (e.target == editMod1Ref.current) {
+              setEditMod1(false);
+            }
+          }}
+          ref={editMod1Ref}
+          className="w-full rounded-md fixed h-full top-0 z-10 left-0 flex justify-center items-center bg-[#00000053]"
+        >
+          <div className="w-[1000px] bg-[#2e2c2c] mx-[20px]">
+            <div className="flex justify-end p-2">
+              <button
+                onClick={() => setEditMod1(false)}
+                className="border flex justify-center items-center p-1 rounded-md"
+              >
+                <i className="bx bx-x"></i>
+              </button>
+            </div>
+            <form onSubmit={editMod1Data} ref={editMod1FormCheck}>
+              <div className="grid grid-cols-2 px-2 max-md:grid-cols-1 gap-3">
+                <input
+                  name="pickL"
+                  className="border p-[10px_20px] border-[#5c5757] inpStyle"
+                  type="text"
+                  placeholder="Pick up location"
+                  required
+                />
+                <input
+                  id="dropL"
+                  className="border p-[10px_20px] border-[#5c5757] inpStyle"
+                  type="text"
+                  placeholder="Drop off location"
+                  required
+                />
+                <div className="relative  items-center flex border border-[#5c5757] flex-col inpStyle gap-1 ">
+                  <span className="absolute px-2 top-[-10px] red-hat-display-600 text-[14px]">
+                    Pick up date
+                  </span>
+                  <input
+                    id="pickD"
+                    type="date"
+                    min={minDate(new Date())}
+                    max={maxDate(new Date())}
+                    required
+                    className="bg-transparent pt-1"
+                  />
+                </div>
+                <div className="relative flex border border-[#5c5757] flex-col inpStyle gap-1 ">
+                  <span className="absolute px-2 top-[-10px] red-hat-display-600 text-[14px]">
+                    Pick up time
+                  </span>
+                  <input
+                    id="pickT"
+                    max={"23:00"}
+                    min={"06:00"}
+                    type="time"
+                    className="inpStyle"
+                    required
+                  />
+                </div>
+                <select
+                  id="journeyT"
+                  onChange={(e) => {
+                    setTotalDis(0);
+                    setTotalTime("0");
+                    setSwitchF(e.target.value);
+                  }}
+                  className="inpStyle p-[10px_20px] border border-[#5c5757]  max-md:col-span-1"
+                >
+                  <option value="hourly">Hourly</option>
+                  <option value="distance">Distance</option>
+                </select>
+                {switchF == "hourly" ? (
+                  <div className="relative p-[10px_20px] flex z-20 border border-[#5c5757] flex-col inpStyle gap-1 ">
+                    <span className="absolute px-2 z-30 top-[-10px] red-hat-display-600 text-[14px]">
+                      Total time
+                    </span>
+                    <input
+                      type="time"
+                      value={totalTime}
+                      onChange={(e) => setTotalTime(e.target.value)}
+                      min={"1:00"}
+                      max={"23:00"}
+                      className="bg-transparent pt-1"
+                      required
+                    />
+                  </div>
+                ) : (
+                  <input
+                    type="number"
+                    className="inpStyle p-[10px_20px]"
+                    max={25}
+                    value={totalDis}
+                    onChange={(e) => setTotalDis(e.target.value)}
+                    min={1}
+                    name="totalD"
+                    placeholder="Total Distance"
+                    required
+                  />
+                )}
+              </div>
+
+              <div className="flex pt-2">
+                <button
+                  onClick={() => {
+                    setCard(paySel);
+                    setEditModPay(false);
+                  }}
+                  className="btn text-blue-500 rounded-bl-md"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditMod1(false);
+                  }}
+                  className="btn text-red-500 rounded-br-md"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      ) : null}
+
+      {editMod3 ? (
+        <div
+          onClick={(e) => {
+            if (e.target == editMod3Ref.current) {
+              setEditMod3(false);
+            }
+          }}
+          ref={editMod3Ref}
+          className="w-full rounded-md fixed h-full top-0 z-10 left-0 flex justify-center items-center bg-[#00000053]"
+        >
+          <div className="w-[1000px] mx-[20px] bg-[#2e2c2c]">
+            <div className="flex justify-end p-2">
+              <button
+                onClick={() => setEditMod3(false)}
+                className="border flex justify-center items-center p-1 rounded-md"
+              >
+                <i className="bx bx-x"></i>
+              </button>
+            </div>
+            <form ref={editMod3FormRef} onSubmit={editMod3Data}>
+              <div className="flex flex-col gap-3 mx-2">
+                <div className="grid grid-cols-2 gap-3 max-md:grid-cols-1">
+                  <input
+                    required
+                    name="inpFName"
+                    className="inpStyle border border-[#7a7777] p-[10px_20px]"
+                    placeholder="First Name"
+                    type="text"
+                  />
+                  <input
+                    required
+                    name="inpLName"
+                    className="inpStyle border border-[#7a7777] p-[10px_20px]"
+                    placeholder="Last Name"
+                    type="text"
+                  />
+                  <input
+                    name="inpEmail"
+                    required
+                    className="inpStyle border border-[#7a7777] p-[10px_20px]"
+                    placeholder="E-mail address"
+                    type="email"
+                  />
+                  <input
+                    name="inpPhone"
+                    required
+                    className="inpStyle border border-[#7a7777] p-[10px_20px]"
+                    placeholder="Phone number"
+                    type="number"
+                    maxLength={9}
+                  />
+                </div>
+                <textarea
+                  name="inpComments"
+                  required
+                  className="inpStyle border border-[#7a7777] p-[10px_20px] col-span-2 min-h-[100px] max-h-[150px]"
+                  placeholder="Comments ..."
+                ></textarea>
+              </div>
+              <div className="flex pt-2">
+                <button className="btn text-blue-500 rounded-bl-md">
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditMod3(false);
+                  }}
+                  className="btn text-red-500 rounded-br-md"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       ) : null}

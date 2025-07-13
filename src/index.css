@@ -71,6 +71,7 @@ select {
   width: 100%;
   border-radius: 5px;
   display: block;
+  padding: 10px 20px;
 }
 
 html {
@@ -99,6 +100,12 @@ html {
 .swiper-slide img {
   display: block;
   object-fit: cover;
-  padding: 10px 20px;
   margin: 0 auto;
+}
+
+.btn {
+  width: 100%;
+  border: 1px solid #716d6d;
+  background: transparent;
+  padding: 5px 12px;
 }

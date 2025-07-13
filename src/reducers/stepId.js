@@ -19,9 +19,13 @@ const stepId = createSlice({
     selCarId: (s, a) => {
       s.carId == a.payload ? (s.carId = 0) : (s.carId = a.payload);
     },
+    // for swiper
+    setSelCarId: (s, a) => {
+      s.carId = a.payload;
+    },
   },
 });
 
 export default stepId.reducer;
 
-export const { next, prev, selCarId } = stepId.actions;
+export const { next, prev, selCarId, setSelCarId } = stepId.actions;

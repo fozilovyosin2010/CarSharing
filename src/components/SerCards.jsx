@@ -1,5 +1,6 @@
 import React from "react";
 import vector from "../assets/vectorR.svg";
+import { Link } from "react-router-dom";
 
 const SerCards = ({ img, text, des }) => {
   return (
@@ -9,11 +10,14 @@ const SerCards = ({ img, text, des }) => {
         <div className="font-medium text-[18px]">{text}</div>
         <div className="text-base text-start red-hat-display-200">{des}</div>
       </div>
-      <div className="">
-        <button className="p-[4px_16px] red-hat-display-600 text-[14px] flex items-center gap-3 bg-[#fff] text-black rounded-lg">
+      <div className="flex">
+        <Link
+          to={"booking"}
+          className="p-[4px_16px]  red-hat-display-600 text-[14px] flex items-center gap-3 bg-[#fff] text-black rounded-lg"
+        >
           <div>Booking</div>
           <img src={vector} alt="" className="w-2 h-2" />
-        </button>
+        </Link>
       </div>
     </div>
   );

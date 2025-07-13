@@ -10,10 +10,10 @@ import mail from "../assets/mail.png";
 
 const Layout = () => {
   let links = [
-    { name: "Home", link: "#home" },
-    { name: "About Us", link: "#about" },
-    { name: "Our service", link: "#service" },
-    { name: "Fleets", link: "#fleets" },
+    { name: "Home", link: "/#home" },
+    { name: "About Us", link: "/#about" },
+    { name: "Our service", link: "/#service" },
+    { name: "Fleets", link: "/#fleets" },
   ];
   let [valLink, setValLink] = useState(false);
 
@@ -49,10 +49,27 @@ const Layout = () => {
     }
   }, [change]);
 
+  let [showBtn, setShowBtn] = useState(false);
+
+  useEffect(() => {
+    window.onscroll = () => {
+      setShowBtn(window.scrollY > 140);
+    };
+  }, []);
+
   return (
     <div className="bg-[#252222] text-[#fff]">
+      {showBtn ? (
+        <button
+          onClick={() => window.scrollTo(0, 0)}
+          className="fixed shadow-[0_0_10px_#000] bottom-[30px] p-3 bg-black w-[40px] z-10 flex items-center justify-center h-[40px] rounded-[20px] right-[30px]"
+        >
+          <i className="bx bx-up-arrow-alt text-[#fff] text-[20px] "></i>
+        </button>
+      ) : null}
+
       <div className="grow-[1] min-h-screen flex flex-col pb-2">
-        <div className="header bg-[#00000098] backdrop-blur-[5px] fixed z-50 w-full top-0 left-0 border-b">
+        <div className="header bg-[#00000098] backdrop-blur-[5px] fixed z-40 w-full top-0 left-0 border-b">
           <div className="section flex items-center justify-between py-5 px-3">
             <a href="/" className="logo">
               <img className="w-[150px] " src={logo} alt="" />

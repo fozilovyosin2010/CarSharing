@@ -19,9 +19,9 @@ const CaruselCar = () => {
 
   let swipeId = useSelector((e) => e.slideId.swipeId);
   let selCar = useSelector((e) => e.stepId.carId);
-  useEffect(() => {
-    console.log(selCar);
-  }, [selCar]);
+  // useEffect(() => {
+  //   console.log(swipeId);
+  // }, [swipeId]);
   return (
     <div className="w-full">
       <Swiper
@@ -37,21 +37,21 @@ const CaruselCar = () => {
       >
         <SwiperSlide
           style={
-            selCar == 0 ? { background: "#353535" } : { background: "#444" }
+            selCar == 1 ? { background: "#353535" } : { background: "#444" }
           }
         >
           <img src={mersB} alt="" />
         </SwiperSlide>
         <SwiperSlide
           style={
-            selCar == 1 ? { background: "#353535" } : { background: "#444" }
+            selCar == 2 ? { background: "#353535" } : { background: "#444" }
           }
         >
           <img src={mersB2} alt="" />
         </SwiperSlide>
         <SwiperSlide
           style={
-            selCar == 2 ? { background: "#353535" } : { background: "#444" }
+            selCar == 3 ? { background: "#353535" } : { background: "#444" }
           }
         >
           <img src={Bmw} alt="" />
