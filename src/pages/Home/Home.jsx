@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import Mers from "../../assets/Mers.png";
 import Chaufer from "../../assets/chauffeur-service-10 1.png";
 import InputBox from "../../components/InputBox";
 
